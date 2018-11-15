@@ -1,17 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <groupId>com.github.treesitter</groupId>
   <artifactId>treesitter4j</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
+  <packaging>pom</packaging>
   <name>Java implementation of Tree Sitter</name>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.github.treesitter</groupId>
+        <artifactId>treesitter4j-compiler</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <modules>
+    <module>runtime</module>
+    <module>compiler</module>
+    <module>json</module>
+  </modules>
   <build>
     <plugins>
       <plugin>
@@ -19,7 +30,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
-          <release>9</release>
+          <release>11</release>
         </configuration>
       </plugin>
       <plugin>
@@ -29,7 +40,18 @@
           <skip>true</skip>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>com.cosium.code</groupId>
+        <artifactId>maven-git-code-format</artifactId>
+        <version>1.20</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>install-hooks</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>
